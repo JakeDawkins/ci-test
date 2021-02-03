@@ -12,6 +12,6 @@ jobs:
             sudo curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.5/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.5 sh
             export PATH=$PATH:~/.rover/env
       - checkout
-      - run: ~/.rover/bin/rover --help
-      - run: ~/.rover/bin/rover graph check jake-circle-test-zz4iq --schema ./test.graphql
+        # - run: ~/.rover/bin/rover --help
+        # - run: ~/.rover/bin/rover graph check jake-circle-test-zz4iq --schema ./test.graphql
       - run: rover --help
