@@ -1,15 +1,20 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+jobs:
+  install:
+    steps:
+      - run: curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.5/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.5 sh
+      - run: rover --help
+  check:
+    steps:
+      - rover graph check jake-circle-test-zz4iq --schema ./test.graphql
+
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
-  RunChecks:
+  install_and_check_monolith:
     # Run the welcome/run job in its own container
     jobs:
-      CheckMonolith
-        steps:
-          - run: curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.5/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.5 sh
-          - run: rover --help
-          - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
-          
+      - install
+      - check
