@@ -11,16 +11,4 @@ jobs:
       - checkout
       - run: ~/.rover/bin/rover --help
       - run: ~/.rover/bin/rover graph check jake-circle-test-zz4iq --schema ./test.graphql
-  # check:
-  #   machine:
-  #     image: ubuntu-1604:202007-01
-  #   steps:
-  #     - run: rover --help
-  #     - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
-
-# Orchestrate or schedule a set of jobs
-workflows:
-  install_and_check_monolith:
-    jobs:
-      - install
-      # - check
+      - run: rover --help
