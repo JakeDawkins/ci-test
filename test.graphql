@@ -1,0 +1,9 @@
+type Query {
+  wow: String!
+  hello: Int!
+  world: String
+}
+
+type Wow {
+  okay: String
+}
