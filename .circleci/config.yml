@@ -7,19 +7,20 @@ jobs:
       image: ubuntu-1604:202007-01
     steps:
       - run: sudo curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.5/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.5 sh
-      - run: export PATH=$PATH:~/.rover/env:~/.rover/bin
-      - run: rover --help
-      - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
-  check:
-    machine:
-      image: ubuntu-1604:202007-01
-    steps:
-      - run: rover --help
-      - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
+      # - run: export PATH=$PATH:~/.rover/env:~/.rover/bin
+      - checkout
+      - run: ~/.rover/bin/rover --help
+      - run: ~/.rover/bin/rover graph check jake-circle-test-zz4iq --schema ./test.graphql
+  # check:
+  #   machine:
+  #     image: ubuntu-1604:202007-01
+  #   steps:
+  #     - run: rover --help
+  #     - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
 
 # Orchestrate or schedule a set of jobs
 workflows:
   install_and_check_monolith:
     jobs:
       - install
-      - check
+      # - check
