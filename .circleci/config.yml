@@ -14,6 +14,4 @@ jobs:
             source $HOME/.rover/env
             echo 'export PATH=$PATH' >> $BASH_ENV
       - checkout
-        # - run: ~/.rover/bin/rover --help
-        # - run: ~/.rover/bin/rover graph check jake-circle-test-zz4iq --schema ./test.graphql
-      - run: rover --help
+      - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
