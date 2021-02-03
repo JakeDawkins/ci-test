@@ -10,8 +10,7 @@ jobs:
           name: Install
           command: |
             sudo curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.5/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.5 sh
-            export PATH=$PATH:~/.rover/env
-            source $BASH_ENV
+            source \"$HOME\"/.rover/env
             rover --help
       - checkout
         # - run: ~/.rover/bin/rover --help
