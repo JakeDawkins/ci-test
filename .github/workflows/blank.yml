@@ -17,7 +17,10 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    # https://docs.github.com/en/actions/reference/environments
     environment: apollo
+    # https://docs.github.com/en/actions/reference/encrypted-secrets
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv
     env:
       APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
       APOLLO_REGISTRY_URL: ${{ secrets.APOLLO_REGISTRY_URL }}
@@ -39,9 +42,9 @@ jobs:
       - name: Install Rover
         run: |
           curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.6/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.6 sh
+          # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#adding-a-system-path
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
 
       - name: Run check
         run: |
-          rover config list
           rover graph check jake-circle-test-zz4iq --schema ./test.graphql
