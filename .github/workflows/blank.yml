@@ -38,7 +38,7 @@ jobs:
           echo 'export PATH=$HOME/.rover/bin:$PATH' >> $GITHUB_ENV
           source $HOME/.rover/env
           echo 'export PATH=$PATH' >> $GITHUB_ENV
-          
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
 
       - name: Run info
         run: |
