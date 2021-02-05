@@ -17,8 +17,17 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build: [linux-stable, macos-stable, windows-stable]
+        include:
+          - build: linux-stable
+            os: ubuntu-latest
+          - build: macos-stable
+            os: macos-latest
+          - build: windows-stable
+            os: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,3 +45,5 @@ jobs:
       - name: Run info
         run: |
           rover info
+
+
