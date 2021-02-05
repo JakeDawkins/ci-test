@@ -18,6 +18,9 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     environment: apollo
+    env:
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      APOLLO_REGISTRY_URL: ${{ secrets.APOLLO_REGISTRY_URL }}
     strategy:
       matrix:
         build: [linux-stable, macos-stable]
