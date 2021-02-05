@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Check
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    environment: apollo
+    env:
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      APOLLO_REGISTRY_URL: ${{ secrets.APOLLO_REGISTRY_URL }}
+    strategy:
+      matrix:
+        build: [linux-stable, macos-stable]
+        include:
+          - build: linux-stable
+            os: ubuntu-latest
+          - build: macos-stable
+            os: macos-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Install Rover
+        run: |
+          curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.6/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.6 sh
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+
+      - name: Run check
+        run: |
+          rover config list
+          rover graph check jake-circle-test-zz4iq --schema ./test.graphql
