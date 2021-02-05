@@ -43,7 +43,8 @@ jobs:
           echo $HOME
           echo $PATH          
           source $HOME/.rover/env
-          # echo 'export PATH=$PATH' >> $BASH_ENV
+          export PATH=$PATH:$HOME/.rover/env
+          echo $PATH 
 
       - name: Run info
         run: |
