@@ -40,14 +40,14 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.6/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.6 sh
           # echo 'export PATH=$HOME/.rover/bin:$PATH' >> $BASH_ENV
           # installs to /home/runner/.rover/bin/rover
-          echo $HOME
-          echo $PATH          
+          echo $HOME 
           source $HOME/.rover/env
-          export PATH=$PATH:$HOME/.rover/env
-          echo $PATH 
+          echo $PATH
+          ls $HOME/.rover/bin
 
       - name: Run info
         run: |
+          echo $PATH
           rover info
 
 
