@@ -35,9 +35,9 @@ jobs:
       - name: Install Rover
         run: |
           curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.6/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.6 sh
-          echo 'export PATH=$HOME/.rover/bin:$PATH' >> $GITHUB_ENV
-          source $HOME/.rover/env
-          echo 'export PATH=$PATH' >> $GITHUB_ENV
+          # echo 'export PATH=$HOME/.rover/bin:$PATH' >> $GITHUB_ENV
+          # source $HOME/.rover/env
+          # echo 'export PATH=$PATH' >> $GITHUB_ENV
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
 
       - name: Run info
@@ -45,6 +45,6 @@ jobs:
           echo $PATH
           echo $GITHUB_ENV
           echo $GITHUB_PATH
-          rover info
+          rover --help
 
 
