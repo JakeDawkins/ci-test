@@ -15,7 +15,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -26,8 +25,6 @@ jobs:
             os: ubuntu-latest
           - build: macos-stable
             os: macos-latest
-          - build: windows-stable
-            os: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,6 +38,7 @@ jobs:
           echo 'export PATH=$HOME/.rover/bin:$PATH' >> $GITHUB_ENV
           source $HOME/.rover/env
           echo 'export PATH=$PATH' >> $GITHUB_ENV
+          cat $GITHUB_ENV
 
       - name: Run info
         run: |
