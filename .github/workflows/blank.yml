@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    environment: Apollo
+    environment: apollo
     strategy:
       matrix:
         build: [linux-stable, macos-stable]
