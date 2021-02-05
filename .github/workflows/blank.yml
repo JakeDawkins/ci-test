@@ -40,4 +40,5 @@ jobs:
 
       - name: Run check
         run: |
+          rover config list
           rover graph check jake-circle-test-zz4iq --schema ./test.graphql
