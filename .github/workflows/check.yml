@@ -1,0 +1,36 @@
+# .github/workflows/check.yml
+
+name: Check Schema
+
+# Controls when the action will run. Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # https://docs.github.com/en/actions/reference/environments
+    environment: apollo
+
+    # https://docs.github.com/en/actions/reference/encrypted-secrets
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+    env:
+      APOLLO_REGISTRY_URL: ${{ secrets.APOLLO_REGISTRY_URL }}
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install Rover
+        run: |
+          curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.2/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.2 sh
+          # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#adding-a-system-path
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+      - name: Run check against prod
+        run: |
+          rover graph check jake-circle-test-zz4iq --schema ./test.graphql
