@@ -9,7 +9,8 @@ jobs:
       - run:
           name: Install
           command: |
-            curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.1-rc.6/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.1-rc.6 sh
+            curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.2/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.2 sh
+            # This allows the PATH changes to persist to the next `run` step
             echo 'export PATH=$HOME/.rover/bin:$PATH' >> $BASH_ENV
             source $HOME/.rover/env
             echo 'export PATH=$PATH' >> $BASH_ENV
