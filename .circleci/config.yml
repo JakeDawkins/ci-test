@@ -12,7 +12,7 @@ jobs:
             curl -sSL https://raw.githubusercontent.com/apollographql/rover/v0.0.2/installers/binstall/scripts/nix/install.sh | VERSION=v0.0.2 sh
             # This allows the PATH changes to persist to the next `run` step
             echo 'export PATH=$HOME/.rover/bin:$PATH' >> $BASH_ENV
-            source $HOME/.rover/env
+            # source $HOME/.rover/env
             # echo 'export PATH=$PATH' >> $BASH_ENV
       - checkout
       - run: rover graph check jake-circle-test-zz4iq --schema ./test.graphql
